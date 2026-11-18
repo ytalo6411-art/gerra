@@ -1,0 +1,26 @@
+{
+  "id": "cedro",
+  "name": "Vale do Cedro",
+  "seed": 1826,
+  "size": 256,
+  "sector": 32,
+  "spawn": [-7.2, 9.4],
+  "structures": {
+    "cabin": [-2.4, -3.6], "shed": [8.6, -10.4], "pen": [8.7, -4.3], "bridge_z": 10.3
+  },
+  "objects": [
+    {"id": "pump_cedro", "kind": "water", "title": "Bomba d’água", "pos": [3.6, 3.0]},
+    {"id": "fire_cedro", "kind": "fire", "title": "Fogueira da clareira", "pos": [-3.7, 4.25]},
+    {"id": "door_cedro", "kind": "door", "title": "Porta da cabana", "pos": [-1.35, 0.26]},
+    {"id": "cache_cedro", "kind": "loot", "title": "Caixa de provisões", "pos": [-4.65, -3.0], "item": "ration", "amount": 2},
+    {"id": "bed_cedro", "kind": "rest", "title": "Cama de campanha", "pos": [-0.10, -5.28]},
+    {"id": "wood_trail_a", "kind": "pickup", "title": "Galhos caídos", "pos": [-8.2, 6.3], "item": "branch", "amount": 2},
+    {"id": "wood_trail_b", "kind": "pickup", "title": "Galhos caídos", "pos": [-10.3, 2.15], "item": "branch", "amount": 1},
+    {"id": "wood_river", "kind": "pickup", "title": "Galhos na margem", "pos": [10.1, 9.5], "item": "branch", "amount": 2},
+    {"id": "wood_north", "kind": "pickup", "title": "Galhos caídos", "pos": [-12.8, -10.3], "item": "branch", "amount": 3},
+    {"id": "berries_edge", "kind": "pickup", "title": "Amoras silvestres", "pos": [-10.85, -2.1], "item": "berries", "amount": 3},
+    {"id": "berries_bank", "kind": "pickup", "title": "Amoras silvestres", "pos": [21.2, 12.7], "item": "berries", "amount": 3},
+    {"id": "berries_high", "kind": "pickup", "title": "Amoras silvestres", "pos": [-1.8, -20.7], "item": "berries", "amount": 4},
+    {"id": "cache_river", "kind": "loot", "title": "Caixote esquecido", "pos": [34.3, 12.5], "item": "ration", "amount": 1}
+  ]
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#141b15">
+  <title>$GODOT_PROJECT_NAME — Vale do Cedro</title>
+  $GODOT_HEAD_INCLUDE
+  <style>
+    :root { color-scheme: dark; --paper: #ede8d5; --gold: #e6bc7d; --green: #141b15; }
+    html, body { width: 100%; height: 100%; margin: 0; background: var(--green); overflow: hidden; }
+    body { font-family: system-ui, sans-serif; color: var(--paper); }
+    #canvas { display: block; width: 100%; height: 100%; outline: none; }
+    #boot { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(ellipse at 65% 60%, #304035, var(--green) 67%); }
+    #boot[hidden] { display: none; }
+    .card { width: min(430px, 82vw); }
+    .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: .22em; font-size: .69rem; }
+    h1 { margin: .35rem 0 1rem; font-size: clamp(1.9rem, 5vw, 3.25rem); letter-spacing: -.04em; }
+    p { margin: 0; color: #b5bda9; font-size: .92rem; line-height: 1.55; }
+    progress { width: 100%; appearance: none; height: 4px; display: block; margin: 1.4rem 0; border: 0; accent-color: var(--gold); }
+    progress::-webkit-progress-bar { background: #4f5a48; }
+    progress::-webkit-progress-value { background: var(--gold); }
+    #engine-license { position: fixed; bottom: 14px; left: 14px; color: #b5bda9; font-size: .75rem; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" aria-label="No Way Home: Vale do Cedro" tabindex="0">Este navegador não oferece Canvas.</canvas>
+  <div id="boot" aria-live="polite">
+    <div class="card">
+      <span class="kicker">Caderno de campo / Entrada 01</span>
+      <h1>NO WAY HOME</h1>
+      <p id="status">Abrindo o caminho para o Vale do Cedro…</p>
+      <progress id="progress" aria-label="Carregamento do vale"></progress>
+    </div>
+  </div>
+  <script src="$GODOT_URL"></script>
+  <script>
+    const config = $GODOT_CONFIG;
+    const boot = document.querySelector('#boot');
+    const progress = document.querySelector('#progress');
+    const status = document.querySelector('#status');
+    const error = (text) => { progress.hidden = true; status.textContent = text; };
+    const missing = Engine.getMissingFeatures({ threads: $GODOT_THREADS_ENABLED });
+    const softwareGPU = () => {
+      // Read only locally to select the video preset; nothing is reported or stored.
+      const probe = document.createElement('canvas').getContext('webgl2');
+      if (!probe) return false;
+      const debug = probe.getExtension('WEBGL_debug_renderer_info');
+      const name = debug ? probe.getParameter(debug.UNMASKED_RENDERER_WEBGL) : '';
+      probe.getExtension('WEBGL_lose_context')?.loseContext();
+      return /swiftshader|llvmpipe|software rasterizer/i.test(name);
+    };
+    if (missing.length) {
+      error('A prévia precisa de WebGL 2. Abra em um navegador compatível ou rode o projeto nativo no Godot.');
+    } else {
+      if (softwareGPU() && !config.args.some(arg => arg.startsWith('--benchmark='))) {
+        if (!config.args.includes('--')) config.args.push('--');
+        config.args.push('--economico');
+      }
+      new Engine(config).startGame({
+        onProgress(current, total) {
+          if (total > 0) { progress.max = total; progress.value = current; }
+        }
+      }).then(() => { boot.hidden = true; }).catch(e => {
+        console.error(e);
+        error('Não foi possível abrir a prévia. Recarregue a página ou execute o projeto no Godot.');
+      });
+    }
+  </script>
+</body>
+</html>
