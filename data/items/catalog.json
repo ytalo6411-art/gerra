@@ -1,0 +1,6 @@
+{
+  "branch": {"name": "Galhos secos", "category": "Material", "stack": 12, "icon": "branch", "description": "Madeira caída na beira da trilha. Três galhos acendem a fogueira preparada da clareira."},
+  "water": {"name": "Água potável", "category": "Bebida", "stack": 4, "icon": "water", "effect": "water", "restore": 39, "description": "Água da bomba protegida. Restaura a hidratação."},
+  "berries": {"name": "Amoras", "category": "Alimento", "stack": 6, "icon": "berries", "effect": "food", "restore": 19, "description": "Frutas identificadas no caderno de campo. Restauram um pouco de saciedade."},
+  "ration": {"name": "Ração de viagem", "category": "Alimento", "stack": 4, "icon": "ration", "effect": "food", "restore": 36, "description": "Uma porção seca guardada na caixa da cabana. Restaura a saciedade."}
+}
